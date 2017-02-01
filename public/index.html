@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Queen City's Lemonaid Stands</title>
+        <!--<link rel="stylesheet" href="style.css">-->
+        <script src="https://use.fontawesome.com/7fb1b7bdac.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-app="LemonaidStandApp">
+        <h1>The Queen City's Lemonaid Stands</h1>
+        <!--<nav>
+            <ul>
+                <li><a ui-sref="create-stand">Create a Stand</a></li>
+                <li><a ui-sref="manage-inventory">Manage Inventory</a></li>
+                <li><a ui-sref="user-highscores">Highscores</a></li>
+            </ul>
+        </nav>-->
+        <section ng-controller="NewStandController">
+            <div>
+                <input type="text" mg-model="standName" placeholder"Name your stand here">
+                <button ng-click="add(stand)">Go!</button>
+            </div>
+        </section>
+    </body>
+    <footer>
+        <p>The best lemonaid. EVER. <i class="fa fa-lemon-o" aria-hidden="true"></i></p>
+        <p>The Queen City's Lemonaid<i class="fa fa-copyright" aria-hidden="true"></i>2017</p>
+    </footer>
+</html>
