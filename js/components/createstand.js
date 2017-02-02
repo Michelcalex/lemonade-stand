@@ -5,11 +5,3 @@ module.exports = {
         templateUrl: 'templates/stand.html',
     },
 };
-
-
-
-
-// app.component('createStand', {
-//     controller: 'NewStandController',
-//     templateUrl: 'templates/stand.html',
-// });
