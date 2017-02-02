@@ -2,13 +2,13 @@ const app = angular.module('LemonaidStandApp', ['ui.router']);
 
 
 // TODO: seperate - for Luke
-// const controllers = [
-//     require('./controllers/newstandcontroller'),
-// ];
+const controllers = [
+    require('./controllers/newstandcontroller'),
+];
 
-// for (let i = 0; i < controllers.length; i++) {
-//     app.controller(controllers[i].name, controllers[i].func);
-// }
+for (let i = 0; i < controllers.length; i++) {
+    app.controller(controllers[i].name, controllers[i].func);
+}
 
 
 app.config(function ($stateProvider) {
@@ -34,21 +34,20 @@ app.config(function ($stateProvider) {
 
 
 
-app.controller('NewStandController', function($scope, LemonaidService) {
-    $scope.standName = '';
+// app.controller('NewStandController', function($scope, LemonaidService) {
+//     $scope.standName = '';
 
-    $scope.add = function() {
-        // console.log('BEFORE', LemonaidService.getLemonaidStands());
-        LemonaidService.addStand($scope.standName);
-    }
-});
+//     $scope.add = function() {
+//         // console.log('BEFORE', LemonaidService.getLemonaidStands());
+//         LemonaidService.addStand($scope.standName);
+//     }
+// });
 
 
 app.controller('ManageInventoryController', function($scope, $stateParams, LemonaidService){
     $scope.allStands = [];
     const tempStands = LemonaidService.getLemonaidStands();
     
-    debugger;
     for (let i = 0; i < tempStands.length; i++) {
         LemonaidService.getStand(tempStands[i].stand_id)
             .then(function(response) {

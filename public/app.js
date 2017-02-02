@@ -3,13 +3,13 @@ const app = angular.module('LemonaidStandApp', ['ui.router']);
 
 
 // TODO: seperate - for Luke
-// const controllers = [
-//     require('./controllers/newstandcontroller'),
-// ];
+const controllers = [
+    require('./controllers/newstandcontroller'),
+];
 
-// for (let i = 0; i < controllers.length; i++) {
-//     app.controller(controllers[i].name, controllers[i].func);
-// }
+for (let i = 0; i < controllers.length; i++) {
+    app.controller(controllers[i].name, controllers[i].func);
+}
 
 
 app.config(function ($stateProvider) {
@@ -35,14 +35,14 @@ app.config(function ($stateProvider) {
 
 
 
-app.controller('NewStandController', function($scope, LemonaidService) {
-    $scope.standName = '';
+// app.controller('NewStandController', function($scope, LemonaidService) {
+//     $scope.standName = '';
 
-    $scope.add = function() {
-        // console.log('BEFORE', LemonaidService.getLemonaidStands());
-        LemonaidService.addStand($scope.standName);
-    }
-});
+//     $scope.add = function() {
+//         // console.log('BEFORE', LemonaidService.getLemonaidStands());
+//         LemonaidService.addStand($scope.standName);
+//     }
+// });
 
 
 app.controller('ManageInventoryController', function($scope, $stateParams, LemonaidService){
@@ -117,4 +117,32 @@ app.factory('LemonaidService', function($http, $state) {
     };
 
 });
+},{"./controllers/newstandcontroller":2}],2:[function(require,module,exports){
+// app.controller('NewStandController', function($scope, LemonaidService) {
+
+//     $scope.standName = '';
+//     $scope.stands = LemonaidService.getLemonaidStands();
+
+//     $scope.add = function() {
+//         console.log('I added a stand');
+//         LemonaidService.addStand($scope.standName);
+//         console.log(LemonaidService.getLemonaidStands());
+//     }
+// });
+
+
+
+module.exports = {
+    name: 'NewStandController',
+    func: function ($scope, LemonaidService) {
+        $scope.standName = '';
+        $scope.stands = LemonaidService.getLemonaidStands();
+
+        $scope.add = function () {
+            console.log('I added a stand');
+            LemonaidService.addStand($scope.standName);
+            console.log(LemonaidService.getLemonaidStands());
+        }
+        },
+};
 },{}]},{},[1]);
