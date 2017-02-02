@@ -2,11 +2,12 @@
 const app = angular.module('LemonaidStandApp', ['ui.router']);
 
 
-// TODO: seperate - for Luke
+//Controllers --------------------------------
 const controllers = [
     require('./controllers/newstand'),
     require('./controllers/highscores'),
     require('./controllers/manageinventory'),
+    require('./controllers/standsummary'),
 ];
 
 for (let i = 0; i < controllers.length; i++) {
@@ -14,11 +15,12 @@ for (let i = 0; i < controllers.length; i++) {
 }
 
 
-
+//Components --------------------------------
 const components = [
     require('./components/createstand'),
     require('./components/highscores'),
     require('./components/manageinventory'),
+    require('./components/standsummary'),
 ];
 
 for (let i = 0; i < components.length; i++) {
@@ -26,6 +28,7 @@ for (let i = 0; i < components.length; i++) {
 }
 
 
+//Services --------------------------------
 const services = [
     require('./services/lemonaidservice'),
 ];
@@ -35,6 +38,7 @@ for (let i = 0; i < services.length; i++) {
 }
 
 
+//States --------------------------------
 app.config(function ($stateProvider) {
     // $stateProvider is the object we add routes ('states') to.
     $stateProvider.state({
@@ -54,57 +58,14 @@ app.config(function ($stateProvider) {
         url:'/highscores',
         component: 'highscores',
     });
+
+    $stateProvider.state({
+        name: 'home',
+        url: '',
+        component: 'createStand',
+    });
 });
-
-
-// app.component('createStand', {
-//     controller: 'NewStandController',
-//     templateUrl: 'templates/stand.html',
-// });
-
-// app.component('manageInventory', {
-//     controller: 'ManageInventoryController',
-//     templateUrl: 'templates/manage.html',
-// });
-
-// app.component('highscores', {
-//     controller: 'HighScoresController',
-//     templateUrl: 'templates/highscores.html',
-// });
-
-
-
-// app.factory('LemonaidService', function($http, $state) {
-//     const allLemonaidStands =[];
-
-//     return {
-//         addStand(standName) {
-//             $http.post('https://blooming-hamlet-70507.herokuapp.com/stand', {
-//                 stand_name: standName,
-//             }).then(function(response) {
-//                 // will run if success in POST
-//                 allLemonaidStands.push({ 
-//                     stand_name: standName,
-//                     stand_id: response.data.stand_id 
-//                 });
-//                 $state.go('manage-inventory');
-
-//             // console.log('AFTER', allLemonaidStands);
-
-//             }).catch(function(error) {
-//                 // will run if error in POST
-//             });
-//         },
-//         getStand(standId) {
-//              return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId);
-//         },
-//         getLemonaidStands() {
-//             return allLemonaidStands;
-//         },
-//     };
-
-// });
-},{"./components/createstand":2,"./components/highscores":3,"./components/manageinventory":4,"./controllers/highscores":5,"./controllers/manageinventory":6,"./controllers/newstand":7,"./services/lemonaidservice":8}],2:[function(require,module,exports){
+},{"./components/createstand":2,"./components/highscores":3,"./components/manageinventory":4,"./components/standsummary":5,"./controllers/highscores":6,"./controllers/manageinventory":7,"./controllers/newstand":8,"./controllers/standsummary":9,"./services/lemonaidservice":10}],2:[function(require,module,exports){
 module.exports = {
     name: 'createStand',
     object: {
@@ -113,13 +74,6 @@ module.exports = {
     },
 };
 
-
-
-
-// app.component('createStand', {
-//     controller: 'NewStandController',
-//     templateUrl: 'templates/stand.html',
-// });
 },{}],3:[function(require,module,exports){
 module.exports = {
     name: 'highscores',
@@ -128,12 +82,6 @@ module.exports = {
         templateUrl: 'templates/highscores.html',
     },
 }
-
-
-// app.component('highscores', {
-//     controller: 'HighScoresController',
-//     templateUrl: 'templates/highscores.html',
-// });
 
 },{}],4:[function(require,module,exports){
 module.exports = {
@@ -144,12 +92,16 @@ module.exports = {
     },
 };
 
-
-// app.component('manageInventory', {
-//     controller: 'ManageInventoryController',
-//     templateUrl: 'templates/manage.html',
-// });
 },{}],5:[function(require,module,exports){
+module.exports = {
+    name: 'standSummary',
+    object: {
+        controller: 'StandSummaryController',
+        templateUrl: 'templates/standsummary.html',
+    },
+};
+
+},{}],6:[function(require,module,exports){
 module.exports = {
 
     name: 'HighScoresController', 
@@ -158,43 +110,62 @@ module.exports = {
     }
     
 };
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = {
     name: 'ManageInventoryController',
-    func: function($scope, $stateParams, LemonaidService) {
-        $scope.allStands = [];
-        const tempStands = LemonaidService.getLemonaidStands();
-        
-        for (let i = 0; i < tempStands.length; i++) {
-            LemonaidService.getStand(tempStands[i].stand_id)
-                .then(function(response) {
-                    let stand = response.data;
-                    stand.name = tempStands[i].stand_name;
+    func: function ($scope, $state, LemonaidService) {
+        const currentStand = LemonaidService.getCurrentStand();
+        //console.log('this is my currentstand' + currentStand);
 
-                    $scope.allStands.push(stand);
+        if (currentStand === undefined) {
+            $state.go('create-stand');
+        } else {
+            LemonaidService.getStand(currentStand.stand_id)
+                .then(function (response) {
+                    let stand = response.data;
+
+                    stand.name = currentStand.stand_name;
+
+                    $scope.stand = stand;
+                    //console.log('stand = ' + stand);
                 });
         }
     }
 }
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = {
     name: 'NewStandController',
     func: function ($scope, LemonaidService) {
         $scope.standName = '';
-        $scope.stands = LemonaidService.getLemonaidStands();
+        //$scope.stands is made up and I am setting it to LemonaidService.getLemonaidStands();
+        //Because I added $scope. I will be able to share its value b/t controller and the view
+        //$scope.stands = LemonaidService.getLemonaidStands();
 
         $scope.add = function () {
-            console.log('I added a stand');
+            //console.log('I added a stand');
             LemonaidService.addStand($scope.standName);
-            console.log(LemonaidService.getLemonaidStands());
+            //console.log(LemonaidService.getLemonaidStands());
         }
-        },
+    },
 };
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+module.exports = {
+    name: 'StandSummaryController',
+    func: function() {
+        console.log('I am a stand summary controller');
+    }
+};
+},{}],10:[function(require,module,exports){
 module.exports = {
     name: 'LemonaidService',
     func: function($http, $state) {
         const allLemonaidStands =[];
+
+        //TODO: ingredients, stats
+        const stats = [];
+
+        const ingredients = [];
+
 
         return {
             addStand(standName) {
@@ -208,17 +179,30 @@ module.exports = {
                     });
                     $state.go('manage-inventory');
 
-                // console.log('AFTER', allLemonaidStands);
+                    //console.log('AFTER', allLemonaidStands);
 
                 }).catch(function(error) {
                     // will run if error in POST
                 });
             },
             getStand(standId) {
+                $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId)
+                    .then(function (info) {
+                    stats.push({
+                        day: info.data.day,
+                        balance: info.data.business.balance,
+                        vistors: info.data.business.yesterday_visitors,
+                        customers: info.data.business.yesterday_cups_sold,
+                    });
+                });
                 return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId);
             },
             getLemonaidStands() {
                 return allLemonaidStands;
+            },
+
+            getCurrentStand() {
+                return allLemonaidStands[allLemonaidStands.length - 1];
             },
         };
     }

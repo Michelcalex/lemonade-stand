@@ -6,6 +6,7 @@ const controllers = [
     require('./controllers/newstand'),
     require('./controllers/highscores'),
     require('./controllers/manageinventory'),
+    require('./controllers/standsummary'),
 ];
 
 for (let i = 0; i < controllers.length; i++) {
@@ -18,6 +19,7 @@ const components = [
     require('./components/createstand'),
     require('./components/highscores'),
     require('./components/manageinventory'),
+    require('./components/standsummary'),
 ];
 
 for (let i = 0; i < components.length; i++) {
@@ -54,5 +56,11 @@ app.config(function ($stateProvider) {
         name: 'user-highscores',
         url:'/highscores',
         component: 'highscores',
+    });
+
+    $stateProvider.state({
+        name: 'home',
+        url: '',
+        component: 'createStand',
     });
 });

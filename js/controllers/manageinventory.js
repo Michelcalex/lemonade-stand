@@ -1,16 +1,20 @@
 module.exports = {
     name: 'ManageInventoryController',
-    func: function($scope, $stateParams, LemonaidService) {
-        $scope.allStands = [];
-        const tempStands = LemonaidService.getLemonaidStands();
-        
-        for (let i = 0; i < tempStands.length; i++) {
-            LemonaidService.getStand(tempStands[i].stand_id)
-                .then(function(response) {
-                    let stand = response.data;
-                    stand.name = tempStands[i].stand_name;
+    func: function ($scope, $state, LemonaidService) {
+        const currentStand = LemonaidService.getCurrentStand();
+        //console.log('this is my currentstand' + currentStand);
 
-                    $scope.allStands.push(stand);
+        if (currentStand === undefined) {
+            $state.go('create-stand');
+        } else {
+            LemonaidService.getStand(currentStand.stand_id)
+                .then(function (response) {
+                    let stand = response.data;
+
+                    stand.name = currentStand.stand_name;
+
+                    $scope.stand = stand;
+                    //console.log('stand = ' + stand);
                 });
         }
     }
