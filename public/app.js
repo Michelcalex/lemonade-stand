@@ -19,6 +19,18 @@ app.config(function ($stateProvider) {
         url: '/stand',
         component: 'createStand',
     });
+
+    $stateProvider.state({
+        name: 'manage-inventory',
+        url:'/manage',
+        component: 'manageInventory',
+    });
+
+    $stateProvider.state({
+        name: 'user-highscores',
+        url:'/highscores',
+        component: 'highscores',
+    });
 });
 
 
@@ -36,6 +48,16 @@ app.controller('NewStandController', function($scope, LemonaidService) {
 });
 
 
+app.controller('ManageInventoryController', function(){
+    console.log('Manage controller');
+});
+
+
+app.controller('HighScoresController', function(){
+    console.log('Highscore controller');
+});
+
+
 
 
 app.component('createStand', {
@@ -43,7 +65,15 @@ app.component('createStand', {
     templateUrl: 'templates/stand.html',
 });
 
+app.component('manageInventory', {
+    controller: 'ManageInventoryController',
+    templateUrl: 'templates/manage.html',
+});
 
+app.component('highscores', {
+    controller: 'HighScoresController',
+    templateUrl: 'templates/highscores.html',
+});
 
 
 app.factory('LemonaidService', function($http) {
@@ -51,12 +81,17 @@ app.factory('LemonaidService', function($http) {
 
     return {
         addStand(stand) {
-            allLemonaidStands.push(stand);
-
             $http.post('https://blooming-hamlet-70507.herokuapp.com/stand', {
                 stand_name: stand.standName,
             }).then(function(response) {
-                debugger;
+                // will run if success in POST
+                allLemonaidStands.push({ 
+                    stand_name: stand.stand_name,
+                    stand_id: response.data.stand_id 
+                });
+
+            }).catch(function(error) {
+                // will run if error in POST
             });
         },
         getLemonaidStands() {
