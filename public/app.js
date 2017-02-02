@@ -4,7 +4,9 @@ const app = angular.module('LemonaidStandApp', ['ui.router']);
 
 // TODO: seperate - for Luke
 const controllers = [
-    require('./controllers/newstandcontroller'),
+    require('./controllers/newstand'),
+    require('./controllers/highscores'),
+    require('./controllers/manageinventory'),
 ];
 
 for (let i = 0; i < controllers.length; i++) {
@@ -32,42 +34,6 @@ app.config(function ($stateProvider) {
         component: 'highscores',
     });
 });
-
-
-
-// app.controller('NewStandController', function($scope, LemonaidService) {
-//     $scope.standName = '';
-
-//     $scope.add = function() {
-//         // console.log('BEFORE', LemonaidService.getLemonaidStands());
-//         LemonaidService.addStand($scope.standName);
-//     }
-// });
-
-
-app.controller('ManageInventoryController', function($scope, $stateParams, LemonaidService){
-    $scope.allStands = [];
-    const tempStands = LemonaidService.getLemonaidStands();
-    
-    debugger;
-    for (let i = 0; i < tempStands.length; i++) {
-        LemonaidService.getStand(tempStands[i].stand_id)
-            .then(function(response) {
-                let stand = response.data;
-                stand.name = tempStands[i].stand_name;
-
-                $scope.allStands.push(stand);
-            });
-    }
-
-});
-
-
-app.controller('HighScoresController', function(){
-    console.log('Highscore controller');
-});
-
-
 
 
 app.component('createStand', {
@@ -117,21 +83,34 @@ app.factory('LemonaidService', function($http, $state) {
     };
 
 });
-},{"./controllers/newstandcontroller":2}],2:[function(require,module,exports){
-// app.controller('NewStandController', function($scope, LemonaidService) {
+},{"./controllers/highscores":2,"./controllers/manageinventory":3,"./controllers/newstand":4}],2:[function(require,module,exports){
+module.exports = {
 
-//     $scope.standName = '';
-//     $scope.stands = LemonaidService.getLemonaidStands();
+    name: 'HighScoresController', 
+    func: function() {
+        console.log('I am highscore controller');
+    }
+    
+};
+},{}],3:[function(require,module,exports){
+module.exports = {
+    name: 'ManageInventoryController',
+    func: function($scope, $stateParams, LemonaidService) {
+        $scope.allStands = [];
+        const tempStands = LemonaidService.getLemonaidStands();
+        
+        for (let i = 0; i < tempStands.length; i++) {
+            LemonaidService.getStand(tempStands[i].stand_id)
+                .then(function(response) {
+                    let stand = response.data;
+                    stand.name = tempStands[i].stand_name;
 
-//     $scope.add = function() {
-//         console.log('I added a stand');
-//         LemonaidService.addStand($scope.standName);
-//         console.log(LemonaidService.getLemonaidStands());
-//     }
-// });
-
-
-
+                    $scope.allStands.push(stand);
+                });
+        }
+    }
+}
+},{}],4:[function(require,module,exports){
 module.exports = {
     name: 'NewStandController',
     func: function ($scope, LemonaidService) {
