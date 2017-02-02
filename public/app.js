@@ -2,6 +2,16 @@
 const app = angular.module('LemonaidStandApp', ['ui.router']);
 
 
+// TODO: seperate - for Luke
+// const controllers = [
+//     require('./controllers/newstandcontroller'),
+// ];
+
+// for (let i = 0; i < controllers.length; i++) {
+//     app.controller(controllers[i].name, controllers[i].func);
+// }
+
+
 app.config(function ($stateProvider) {
     // $stateProvider is the object we add routes ('states') to.
     $stateProvider.state({
@@ -27,18 +37,27 @@ app.controller('NewStandController', function($scope, LemonaidService) {
 
 
 
+
 app.component('createStand', {
     controller: 'NewStandController',
     templateUrl: 'templates/stand.html',
 });
 
 
-app.factory('LemonaidService', function() {
+
+
+app.factory('LemonaidService', function($http) {
     const allLemonaidStands =[];
 
     return {
         addStand(stand) {
             allLemonaidStands.push(stand);
+
+            $http.post('https://blooming-hamlet-70507.herokuapp.com/stand', {
+                stand_name: stand.standName,
+            }).then(function(response) {
+                debugger;
+            });
         },
         getLemonaidStands() {
             return allLemonaidStands;
