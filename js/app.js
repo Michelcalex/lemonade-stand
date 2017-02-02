@@ -34,21 +34,21 @@ app.config(function ($stateProvider) {
 
 
 
-app.controller('NewStandController', function($scope, LemonaidService) {
+app.controller('NewStandController', function($scope, $state, LemonaidService) {
 
     $scope.standName = '';
-    $scope.stands = LemonaidService.getLemonaidStands();
 
     $scope.add = function() {
-        console.log('I added a stand');
+        // console.log('BEFORE', LemonaidService.getLemonaidStands());
         LemonaidService.addStand($scope.standName);
-        console.log(LemonaidService.getLemonaidStands());
+        $state.go('manage-inventory');
     }
+
 });
 
 
-app.controller('ManageInventoryController', function(){
-    console.log('Manage controller');
+app.controller('ManageInventoryController', function($scope, $stateParams,LemonaidService){
+    
 });
 
 
@@ -75,25 +75,30 @@ app.component('highscores', {
 });
 
 
+
 app.factory('LemonaidService', function($http) {
     const allLemonaidStands =[];
 
     return {
-        addStand(stand) {
+        addStand(standName) {
             $http.post('https://blooming-hamlet-70507.herokuapp.com/stand', {
-                stand_name: stand.standName,
+                stand_name: standName,
             }).then(function(response) {
                 // will run if success in POST
+                debugger;
                 allLemonaidStands.push({ 
-                    stand_name: stand.stand_name,
+                    stand_name: standName,
                     stand_id: response.data.stand_id 
                 });
+
+            // console.log('AFTER', allLemonaidStands);
 
             }).catch(function(error) {
                 // will run if error in POST
             });
         },
         getLemonaidStands() {
+            debugger;
             return allLemonaidStands;
         },
     };
