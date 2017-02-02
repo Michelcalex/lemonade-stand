@@ -34,21 +34,31 @@ app.config(function ($stateProvider) {
 
 
 
-app.controller('NewStandController', function($scope, $state, LemonaidService) {
-
+app.controller('NewStandController', function($scope, LemonaidService) {
     $scope.standName = '';
 
     $scope.add = function() {
         // console.log('BEFORE', LemonaidService.getLemonaidStands());
         LemonaidService.addStand($scope.standName);
-        $state.go('manage-inventory');
     }
-
 });
 
 
-app.controller('ManageInventoryController', function($scope, $stateParams,LemonaidService){
+app.controller('ManageInventoryController', function($scope, $stateParams, LemonaidService){
+    $scope.allStands = [];
+    const tempStands = LemonaidService.getLemonaidStands();
     
+    debugger;
+    for (let i = 0; i < tempStands.length; i++) {
+        LemonaidService.getStand(tempStands[i].stand_id)
+            .then(function(response) {
+                let stand = response.data;
+                stand.name = tempStands[i].stand_name;
+
+                $scope.allStands.push(stand);
+            });
+    }
+
 });
 
 
@@ -76,7 +86,7 @@ app.component('highscores', {
 
 
 
-app.factory('LemonaidService', function($http) {
+app.factory('LemonaidService', function($http, $state) {
     const allLemonaidStands =[];
 
     return {
@@ -85,11 +95,11 @@ app.factory('LemonaidService', function($http) {
                 stand_name: standName,
             }).then(function(response) {
                 // will run if success in POST
-                debugger;
                 allLemonaidStands.push({ 
                     stand_name: standName,
                     stand_id: response.data.stand_id 
                 });
+                $state.go('manage-inventory');
 
             // console.log('AFTER', allLemonaidStands);
 
@@ -97,8 +107,10 @@ app.factory('LemonaidService', function($http) {
                 // will run if error in POST
             });
         },
+        getStand(standId) {
+             return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId);
+        },
         getLemonaidStands() {
-            debugger;
             return allLemonaidStands;
         },
     };
