@@ -7,7 +7,6 @@ const controllers = [
     require('./controllers/newstand'),
     require('./controllers/highscores'),
     require('./controllers/manageinventory'),
-    require('./controllers/standsummary'),
 ];
 
 for (let i = 0; i < controllers.length; i++) {
@@ -65,7 +64,7 @@ app.config(function ($stateProvider) {
         component: 'createStand',
     });
 });
-},{"./components/createstand":2,"./components/highscores":3,"./components/manageinventory":4,"./components/standsummary":5,"./controllers/highscores":6,"./controllers/manageinventory":7,"./controllers/newstand":8,"./controllers/standsummary":9,"./services/lemonaidservice":10}],2:[function(require,module,exports){
+},{"./components/createstand":2,"./components/highscores":3,"./components/manageinventory":4,"./components/standsummary":5,"./controllers/highscores":6,"./controllers/manageinventory":7,"./controllers/newstand":8,"./services/lemonaidservice":9}],2:[function(require,module,exports){
 module.exports = {
     name: 'createStand',
     object: {
@@ -94,10 +93,15 @@ module.exports = {
 
 },{}],5:[function(require,module,exports){
 module.exports = {
-    name: 'standSummary',
+    name: 'standSummary', // <stand-summary> in view
     object: {
-        controller: 'StandSummaryController',
         templateUrl: 'templates/standsummary.html',
+
+        // these are use to pass data from manage.html (manageinventory.js) into the stand-summary component
+        bindings: {
+            title: '<', // < is read only binding, otherwise known as one-way binding
+            value: '<',
+        }
     },
 };
 
@@ -127,7 +131,7 @@ module.exports = {
                     stand.name = currentStand.stand_name;
 
                     $scope.stand = stand;
-                    //console.log('stand = ' + stand);
+                    console.log($scope.stand);
                 });
         }
     }
@@ -150,22 +154,9 @@ module.exports = {
 };
 },{}],9:[function(require,module,exports){
 module.exports = {
-    name: 'StandSummaryController',
-    func: function() {
-        console.log('I am a stand summary controller');
-    }
-};
-},{}],10:[function(require,module,exports){
-module.exports = {
     name: 'LemonaidService',
     func: function($http, $state) {
         const allLemonaidStands =[];
-
-        //TODO: ingredients, stats
-        const stats = [];
-
-        const ingredients = [];
-
 
         return {
             addStand(standName) {
@@ -186,15 +177,6 @@ module.exports = {
                 });
             },
             getStand(standId) {
-                $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId)
-                    .then(function (info) {
-                    stats.push({
-                        day: info.data.day,
-                        balance: info.data.business.balance,
-                        vistors: info.data.business.yesterday_visitors,
-                        customers: info.data.business.yesterday_cups_sold,
-                    });
-                });
                 return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId);
             },
             getLemonaidStands() {

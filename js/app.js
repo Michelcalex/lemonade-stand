@@ -6,7 +6,6 @@ const controllers = [
     require('./controllers/newstand'),
     require('./controllers/highscores'),
     require('./controllers/manageinventory'),
-    require('./controllers/standsummary'),
 ];
 
 for (let i = 0; i < controllers.length; i++) {

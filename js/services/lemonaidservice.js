@@ -3,12 +3,6 @@ module.exports = {
     func: function($http, $state) {
         const allLemonaidStands =[];
 
-        //TODO: ingredients, stats
-        const stats = [];
-
-        const ingredients = [];
-
-
         return {
             addStand(standName) {
                 $http.post('https://blooming-hamlet-70507.herokuapp.com/stand', {
@@ -28,15 +22,6 @@ module.exports = {
                 });
             },
             getStand(standId) {
-                $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId)
-                    .then(function (info) {
-                    stats.push({
-                        day: info.data.day,
-                        balance: info.data.business.balance,
-                        vistors: info.data.business.yesterday_visitors,
-                        customers: info.data.business.yesterday_cups_sold,
-                    });
-                });
                 return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId);
             },
             getLemonaidStands() {

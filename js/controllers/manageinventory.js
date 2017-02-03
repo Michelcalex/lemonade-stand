@@ -14,7 +14,7 @@ module.exports = {
                     stand.name = currentStand.stand_name;
 
                     $scope.stand = stand;
-                    //console.log('stand = ' + stand);
+                    console.log($scope.stand);
                 });
         }
     }
