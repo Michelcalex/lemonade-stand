@@ -7,6 +7,7 @@ const controllers = [
     require('./controllers/newstand'),
     require('./controllers/highscores'),
     require('./controllers/manageinventory'),
+    require('./controllers/inventorysummary'),
 ];
 
 for (let i = 0; i < controllers.length; i++) {
@@ -20,6 +21,7 @@ const components = [
     require('./components/highscores'),
     require('./components/manageinventory'),
     require('./components/standsummary'),
+    require('./components/inventorysummary'),
 ];
 
 for (let i = 0; i < components.length; i++) {
@@ -64,7 +66,7 @@ app.config(function ($stateProvider) {
         component: 'createStand',
     });
 });
-},{"./components/createstand":2,"./components/highscores":3,"./components/manageinventory":4,"./components/standsummary":5,"./controllers/highscores":6,"./controllers/manageinventory":7,"./controllers/newstand":8,"./services/lemonaidservice":9}],2:[function(require,module,exports){
+},{"./components/createstand":2,"./components/highscores":3,"./components/inventorysummary":4,"./components/manageinventory":5,"./components/standsummary":6,"./controllers/highscores":7,"./controllers/inventorysummary":8,"./controllers/manageinventory":9,"./controllers/newstand":10,"./services/lemonaidservice":11}],2:[function(require,module,exports){
 module.exports = {
     name: 'createStand',
     object: {
@@ -84,6 +86,21 @@ module.exports = {
 
 },{}],4:[function(require,module,exports){
 module.exports = {
+    name: 'inventorySummary', // <inventory-summary> in view
+    object: {
+        controller: 'InventorySummaryController',
+        controllerAs: '$ctrl',
+        templateUrl: 'templates/inventorysummary.html',
+
+        // these are use to pass data from manage.html (manageinventory.js) into the stand-summary component
+        bindings: {
+            ingredient: '<', // < is read only binding, otherwise known as one-way binding
+        }
+    },
+};
+
+},{}],5:[function(require,module,exports){
+module.exports = {
     name: 'manageInventory',
     object: {
         controller: 'ManageInventoryController',
@@ -91,7 +108,7 @@ module.exports = {
     },
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = {
     name: 'standSummary', // <stand-summary> in view
     object: {
@@ -99,13 +116,12 @@ module.exports = {
 
         // these are use to pass data from manage.html (manageinventory.js) into the stand-summary component
         bindings: {
-            title: '<', // < is read only binding, otherwise known as one-way binding
-            value: '<',
+            info: '<', // < is read only binding, otherwise known as one-way binding
         }
     },
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = {
 
     name: 'HighScoresController', 
@@ -114,7 +130,20 @@ module.exports = {
     }
     
 };
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+module.exports = {
+    name: 'InventorySummaryController',
+    func: function ($scope, $state, LemonaidService) {
+        $scope.buy = function(ingred) {
+            LemonaidService.buyIngredient(ingred)
+                .then(function(response) {
+                    debugger;
+                });
+        };
+    },
+};
+
+},{}],9:[function(require,module,exports){
 module.exports = {
     name: 'ManageInventoryController',
     func: function ($scope, $state, LemonaidService) {
@@ -129,14 +158,42 @@ module.exports = {
                     let stand = response.data;
 
                     stand.name = currentStand.stand_name;
+                    stand.ingredients.forEach(function(ingredient) {
+                        if (ingredient.label === 'ice') {
+                            ingredient.price = '$0.50';
+                        }
+                        if (ingredient.label === 'lemons') {
+                            ingredient.price = '$2';
+                        }
+                        if (ingredient.label === 'sugar') {
+                            ingredient.price = '$1.25';
+                        }
+                        if (ingredient.label === 'cups') {
+                            ingredient.price = '$0.10';
+                        }
+                    });
 
                     $scope.stand = stand;
+                    $scope.stats = [{
+                        title: 'Day',
+                        value: stand.day,
+                    },{
+                        title: 'Balance',
+                        value: stand.business.balance,
+                    },{
+                        title: 'Visitors',
+                        value: stand.business.yesterday_visitors,
+                    },{
+                        title: 'Balance',
+                        value: stand.business.yesterday_cups_sold,
+                    }];
+                    
                     console.log($scope.stand);
                 });
         }
     }
 }
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = {
     name: 'NewStandController',
     func: function ($scope, LemonaidService) {
@@ -152,7 +209,7 @@ module.exports = {
         }
     },
 };
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = {
     name: 'LemonaidService',
     func: function($http, $state) {
@@ -174,6 +231,14 @@ module.exports = {
 
                 }).catch(function(error) {
                     // will run if error in POST
+                });
+            },
+            buyIngredient(ingred, quantity) {
+                return $http.post('https://blooming-hamlet-70507.herokuapp.com/stand/update', {
+                    property: 'ingredients' + ingred.label,
+                    add: quantity,
+                },{
+                    id: getCurrentStand().stand_id,
                 });
             },
             getStand(standId) {

@@ -1,0 +1,8 @@
+<section>
+    <h3>{{ $ctrl.ingredient.label }}</h3>
+    <p>{{ $ctrl.ingredient.label }} in stock</p>
+
+    <span>
+        <input type="text" placeholder="{{ $ctrl.ingredient.price }} each" ng-model="quantity" />
+        <button type="button" ng-click="buy(ingredient, quantity)">Buy!</button>
+</section>
