@@ -1,8 +1,7 @@
 <section>
     <h2>{{ stand.name }}</h2>
-
     <!-- this is the $parent html to the stand-summary component -->
     <stand-summary ng-repeat="info in stats" info="info"></stand-summary>
-
     <inventory-summary ng-repeat="ingredient in stand.ingredients" ingredient="ingredient" id="standId"></inventory-summary>
+    <weather-summary ng-repeat="condition in weather" condition="condition"></weather-summary>
 </section> 

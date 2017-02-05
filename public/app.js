@@ -22,6 +22,8 @@ const components = [
     require('./components/manageinventory'),
     require('./components/standsummary'),
     require('./components/inventorysummary'),
+    require('./components/highscorelist'),
+    require('./components/weathersummary'),
 ];
 
 for (let i = 0; i < components.length; i++) {
@@ -66,7 +68,7 @@ app.config(function ($stateProvider) {
         component: 'createStand',
     });
 });
-},{"./components/createstand":2,"./components/highscores":3,"./components/inventorysummary":4,"./components/manageinventory":5,"./components/standsummary":6,"./controllers/highscores":7,"./controllers/inventorysummary":8,"./controllers/manageinventory":9,"./controllers/newstand":10,"./services/lemonaidservice":11}],2:[function(require,module,exports){
+},{"./components/createstand":2,"./components/highscorelist":3,"./components/highscores":4,"./components/inventorysummary":5,"./components/manageinventory":6,"./components/standsummary":7,"./components/weathersummary":8,"./controllers/highscores":9,"./controllers/inventorysummary":10,"./controllers/manageinventory":11,"./controllers/newstand":12,"./services/lemonaidservice":13}],2:[function(require,module,exports){
 module.exports = {
     name: 'createStand',
     object: {
@@ -77,14 +79,26 @@ module.exports = {
 
 },{}],3:[function(require,module,exports){
 module.exports = {
-    name: 'highscores',
+    name: 'highscoreList',
     object: {
-        controller: 'HighScoresController',
-        templateUrl: 'templates/highscores.html',
+        templateUrl: 'templates/scores.html',
+        bindings: {
+            score: '<',
+        }
     },
 }
 
 },{}],4:[function(require,module,exports){
+module.exports = {
+    name: 'highscores',
+    object: {
+        controller: 'HighScoresController',
+        controllerAs: '$ctrl',
+        templateUrl: 'templates/highscores.html',
+    },
+}
+
+},{}],5:[function(require,module,exports){
 module.exports = {
     name: 'inventorySummary', // <inventory-summary> in view
     object: {
@@ -99,7 +113,7 @@ module.exports = {
     },
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = {
     name: 'manageInventory',
     object: {
@@ -108,7 +122,7 @@ module.exports = {
     },
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = {
     name: 'standSummary', // <stand-summary> in view
     object: {
@@ -121,16 +135,32 @@ module.exports = {
     },
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+module.exports = {
+    name: 'weatherSummary', // <stand-summary> in view
+    object: {
+        templateUrl: 'templates/weathersummary.html',
+
+        // these are use to pass data from manage.html (manageinventory.js) into the stand-summary component
+        bindings: {
+            condition: '<', // < is read only binding, otherwise known as one-way binding
+        }
+    },
+};
+},{}],9:[function(require,module,exports){
 module.exports = {
 
     name: 'HighScoresController', 
-    func: function() {
+    func: function($scope, LemonaidService) {
         console.log('I am highscore controller');
+        LemonaidService.getHighScores()
+            .then(function(response) {
+                $scope.scores = response.data;
+            });
     }
     
 };
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = {
     name: 'InventorySummaryController',
     func: function ($scope, $state, LemonaidService) {
@@ -143,7 +173,7 @@ module.exports = {
             }
     },
 };
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = {
     name: 'ManageInventoryController',
     func: function ($scope, $state, LemonaidService) {
@@ -188,13 +218,20 @@ module.exports = {
                         title: 'Balance',
                         value: stand.business.yesterday_cups_sold,
                     }];
-                    
-                    console.log($scope.stand);
                 });
+
+                LemonaidService.getWeather()
+                    .then(function(response){
+                        let result = response.data
+                        $scope.weather = [{
+                            temperature: result.temperature,
+                            condition: result.condition,
+                         }];
+                    });
         }
     }
 }
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = {
     name: 'NewStandController',
     func: function ($scope, LemonaidService) {
@@ -210,7 +247,7 @@ module.exports = {
         }
     },
 };
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = {
     name: 'LemonaidService',
     func: function($http, $state) {
@@ -249,6 +286,14 @@ module.exports = {
 
             getCurrentStand() {
                 return allLemonaidStands[allLemonaidStands.length - 1];
+            },
+
+            getHighScores() {
+                return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/top')
+            },
+
+            getWeather() {
+                return $http.get('https://blooming-hamlet-70507.herokuapp.com/weather/forecast')
             },
         };
     }

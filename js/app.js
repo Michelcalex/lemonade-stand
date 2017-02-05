@@ -22,6 +22,7 @@ const components = [
     require('./components/standsummary'),
     require('./components/inventorysummary'),
     require('./components/highscorelist'),
+    require('./components/weathersummary'),
 ];
 
 for (let i = 0; i < components.length; i++) {

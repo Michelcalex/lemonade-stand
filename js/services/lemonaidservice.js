@@ -41,6 +41,10 @@ module.exports = {
             getHighScores() {
                 return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/top')
             },
+
+            getWeather() {
+                return $http.get('https://blooming-hamlet-70507.herokuapp.com/weather/forecast')
+            },
         };
     }
 }

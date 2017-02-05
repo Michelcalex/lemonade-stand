@@ -44,6 +44,14 @@ module.exports = {
                     }];
                 });
 
+                LemonaidService.getWeather()
+                    .then(function(response){
+                        let result = response.data
+                        $scope.weather = [{
+                            temperature: result.temperature,
+                            condition: result.condition,
+                         }];
+                    });
         }
     }
 }
