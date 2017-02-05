@@ -134,15 +134,24 @@ module.exports = {
 module.exports = {
     name: 'InventorySummaryController',
     func: function ($scope, $state, LemonaidService) {
-        $scope.buy = function(ingred) {
-            LemonaidService.buyIngredient(ingred)
-                .then(function(response) {
-                    debugger;
-                });
-        };
+            $scope.buy = function(ingredientLabel, quantity) {
+                console.log(LemonaidService.getCurrentStand().stand_id);
+                LemonaidService.buyIngredient(ingredientLabel, quantity, LemonaidService.getCurrentStand().stand_id)
+                    .then(function(response) {
+                        debugger;
+                    });
+            }
     },
 };
 
+
+
+
+//standIngred.push({
+    //                     property: response.data.ingredients.label,
+    //                     add: quantity, 
+    //                 });
+    //                 console.log(standIngred);
 },{}],9:[function(require,module,exports){
 module.exports = {
     name: 'ManageInventoryController',
@@ -158,20 +167,43 @@ module.exports = {
                     let stand = response.data;
 
                     stand.name = currentStand.stand_name;
-                    stand.ingredients.forEach(function(ingredient) {
-                        if (ingredient.label === 'ice') {
+
+                    stand.ingredients.forEach(function(ingredient){
+                        if(ingredient.label === 'ice') {
                             ingredient.price = '$0.50';
                         }
-                        if (ingredient.label === 'lemons') {
-                            ingredient.price = '$2';
+                        if(ingredient.label === 'lemons') {
+                            ingredient.price = '$2.00';
                         }
-                        if (ingredient.label === 'sugar') {
+                        if(ingredient.label === 'ice') {
                             ingredient.price = '$1.25';
                         }
-                        if (ingredient.label === 'cups') {
+                        if(ingredient.label === 'ice') {
                             ingredient.price = '$0.10';
                         }
-                    });
+                    })
+
+
+
+                    // const listOfIngred = stand.ingredients;
+
+                    // for(let i = 0; i < listOfIngred.length; i++) {
+                    //     if(listOfIngred[i].label === 'ice') {
+                    //         listOfIngred[i].price = '$0.50';
+                    //     }
+                    //     if(listOfIngred[i].label === 'lemons') {
+                    //         listOfIngred[i].price = '$2.00';
+                    //     }
+                    //     if(listOfIngred[i].label === 'sugar') {
+                    //         listOfIngred[i].price = '$1.25';
+                    //     }
+                    //     if(listOfIngred[i].label === 'cups') {
+                    //         listOfIngred[i].price = '$0.10';
+                    //     }
+                    // }
+
+                    // $scope.listOfIngred = listOfIngred;
+            
 
                     $scope.stand = stand;
                     $scope.stats = [{
@@ -190,6 +222,10 @@ module.exports = {
                     
                     console.log($scope.stand);
                 });
+            
+
+
+
         }
     }
 }
@@ -233,12 +269,10 @@ module.exports = {
                     // will run if error in POST
                 });
             },
-            buyIngredient(ingred, quantity) {
-                return $http.post('https://blooming-hamlet-70507.herokuapp.com/stand/update', {
-                    property: 'ingredients' + ingred.label,
+            buyIngredient(ingredientLabel, quantity, standId) {
+                return $http.post('https://blooming-hamlet-70507.herokuapp.com/stand/update?id=' + standId, {
+                    property: "ingredients." + ingredientLabel,
                     add: quantity,
-                },{
-                    id: getCurrentStand().stand_id,
                 });
             },
             getStand(standId) {

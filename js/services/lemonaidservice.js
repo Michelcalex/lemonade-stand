@@ -21,6 +21,12 @@ module.exports = {
                     // will run if error in POST
                 });
             },
+            buyIngredient(ingredientLabel, quantity, standId) {
+                return $http.post('https://blooming-hamlet-70507.herokuapp.com/stand/update?id=' + standId, {
+                    property: "ingredients." + ingredientLabel,
+                    add: quantity,
+                });
+            },
             getStand(standId) {
                 return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/' + standId);
             },
