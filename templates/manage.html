@@ -2,8 +2,7 @@
     <h2>{{ stand.name }}</h2>
 
     <!-- this is the $parent html to the stand-summary component -->
-    <stand-summary title="'Day'" value="stand.day"></stand-summary>
-    <stand-summary title="'Balance'" value="stand.business.balance"></stand-summary>
-    <stand-summary title="'Visitors'" value="stand.business.yesterday_visitors"></stand-summary>
-    <stand-summary title="'Customers'" value="stand.business.yesterday_cups_sold"></stand-summary>
+    <stand-summary ng-repeat="info in stats" info="info"></stand-summary>
+
+    <inventory-summary ng-repeat="ingredient in stand.ingredients" ingredient="ingredient" id="standId"></inventory-summary>
 </section> 
