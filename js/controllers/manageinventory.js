@@ -42,9 +42,8 @@ module.exports = {
                         title: 'Balance',
                         value: stand.business.yesterday_cups_sold,
                     }];
-                    
-                    console.log($scope.stand);
                 });
+
         }
     }
 }

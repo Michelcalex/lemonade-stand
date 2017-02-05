@@ -37,6 +37,10 @@ module.exports = {
             getCurrentStand() {
                 return allLemonaidStands[allLemonaidStands.length - 1];
             },
+
+            getHighScores() {
+                return $http.get('https://blooming-hamlet-70507.herokuapp.com/stand/top')
+            },
         };
     }
 }

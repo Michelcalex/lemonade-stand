@@ -21,6 +21,7 @@ const components = [
     require('./components/manageinventory'),
     require('./components/standsummary'),
     require('./components/inventorysummary'),
+    require('./components/highscorelist'),
 ];
 
 for (let i = 0; i < components.length; i++) {
