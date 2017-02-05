@@ -28,28 +28,6 @@ module.exports = {
                         }
                     })
 
-
-
-                    // const listOfIngred = stand.ingredients;
-
-                    // for(let i = 0; i < listOfIngred.length; i++) {
-                    //     if(listOfIngred[i].label === 'ice') {
-                    //         listOfIngred[i].price = '$0.50';
-                    //     }
-                    //     if(listOfIngred[i].label === 'lemons') {
-                    //         listOfIngred[i].price = '$2.00';
-                    //     }
-                    //     if(listOfIngred[i].label === 'sugar') {
-                    //         listOfIngred[i].price = '$1.25';
-                    //     }
-                    //     if(listOfIngred[i].label === 'cups') {
-                    //         listOfIngred[i].price = '$0.10';
-                    //     }
-                    // }
-
-                    // $scope.listOfIngred = listOfIngred;
-            
-
                     $scope.stand = stand;
                     $scope.stats = [{
                         title: 'Day',
@@ -67,10 +45,6 @@ module.exports = {
                     
                     console.log($scope.stand);
                 });
-            
-
-
-
         }
     }
 }

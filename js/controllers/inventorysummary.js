@@ -2,20 +2,11 @@ module.exports = {
     name: 'InventorySummaryController',
     func: function ($scope, $state, LemonaidService) {
             $scope.buy = function(ingredientLabel, quantity) {
-                console.log(LemonaidService.getCurrentStand().stand_id);
-                LemonaidService.buyIngredient(ingredientLabel, quantity, LemonaidService.getCurrentStand().stand_id)
+                const currentStand = (LemonaidService.getCurrentStand().stand_id);
+                LemonaidService.buyIngredient(ingredientLabel, quantity, currentStand)
                     .then(function(response) {
-                        debugger;
+                        $state.reload();
                     });
             }
     },
 };
-
-
-
-
-//standIngred.push({
-    //                     property: response.data.ingredients.label,
-    //                     add: quantity, 
-    //                 });
-    //                 console.log(standIngred);
