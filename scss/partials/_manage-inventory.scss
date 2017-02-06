@@ -7,6 +7,7 @@
     h2 {
         @include grid-row();
         margin-top: 0px;
+        font-family: $header-font;
     }
 
     #stand-summary {
@@ -21,6 +22,7 @@
 
             .title {
                 font-weight: bold;
+                font-family: $header-font;
             }
         }
     }
@@ -62,6 +64,7 @@
 
                 h3 {
                     margin-top: 0px;
+                    font-family: $header-font;
                 }
 
                 button {

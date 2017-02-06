@@ -7,6 +7,7 @@
         @include grid-row();
         margin-top: 0px;
         text-align: center;
+        font-family: $header-font;
     }
 
     #highscores-summary {
@@ -25,7 +26,8 @@
             h3 {
                 text-align: center;
                 margin-top: 0px;
-                color: $primary-highlight-txt-color
+                color: $primary-highlight-txt-color;
+                font-family: $header-font;
             }
 
             p {

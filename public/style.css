@@ -1286,7 +1286,8 @@ header {
         padding: 0 10px;
         max-width: 18%; }
       header nav #logo-nav h1 {
-        color: #FF6B6B; }
+        color: #FF6B6B;
+        font-family: 'Barrio', cursive; }
     header nav ul {
       display: flex;
       padding: 0; }
@@ -1356,7 +1357,8 @@ main {
     max-width: 75rem;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 0px; }
+    margin-top: 0px;
+    font-family: "Barrio", cursive; }
     #manage-inventory h2::before, #manage-inventory h2::after {
       display: table;
       content: ' '; }
@@ -1371,7 +1373,8 @@ main {
       margin: 0 2%;
       border-radius: 5px; }
       #manage-inventory #stand-summary stand-summary .title {
-        font-weight: bold; }
+        font-weight: bold;
+        font-family: "Barrio", cursive; }
   #manage-inventory #weather-summary {
     display: flex;
     justify-content: center; }
@@ -1397,7 +1400,8 @@ main {
       #manage-inventory #inventory-summary inventory-summary section {
         padding: 15px 0px; }
         #manage-inventory #inventory-summary inventory-summary section h3 {
-          margin-top: 0px; }
+          margin-top: 0px;
+          font-family: "Barrio", cursive; }
         #manage-inventory #inventory-summary inventory-summary section button {
           background-color: #93E1D8;
           color: #1A535C; }
@@ -1421,7 +1425,8 @@ main {
     margin-right: auto;
     margin-left: auto;
     margin-top: 0px;
-    text-align: center; }
+    text-align: center;
+    font-family: "Barrio", cursive; }
     #highscores h2::before, #highscores h2::after {
       display: table;
       content: ' '; }
@@ -1441,7 +1446,8 @@ main {
       #highscores #highscores-summary highscore-list h3 {
         text-align: center;
         margin-top: 0px;
-        color: #FF6B6B; }
+        color: #FF6B6B;
+        font-family: "Barrio", cursive; }
       #highscores #highscores-summary highscore-list p {
         margin: 5px 0px 5px 10px; }
         #highscores #highscores-summary highscore-list p span {
