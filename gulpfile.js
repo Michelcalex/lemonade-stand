@@ -26,7 +26,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('assets', function() {
-    return gulp.src(['assets/*.ico', 'assets/*.jpg'])
+    return gulp.src(['assets/*.ico', 'assets/*.jpg', 'assets/*.png'])
         .pipe(gulp.dest('public/assets'));
 });
 
