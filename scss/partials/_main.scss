@@ -9,6 +9,7 @@ main {
     #stand-section {
         text-align: center;
         padding: 11% 0;
+        position: relative;
 
         h3 {
             color: $primary-txt-color;
@@ -27,6 +28,14 @@ main {
         button:hover {
             background-color: $hover-btn-bkgd-color;
             color: $hover-btn-txt-color;
+        }
+
+        #bottom {
+            background-image: url("../../assets/yellow-stripes.jpg");
+            width: 100%;
+            height: 109px;
+            position: fixed;
+            bottom: 100px;
         }
     }
 }
