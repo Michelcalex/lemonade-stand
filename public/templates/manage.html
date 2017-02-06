@@ -1,7 +1,13 @@
-<section>
+<section id="manage-inventory">
     <h2>{{ stand.name }}</h2>
     <!-- this is the $parent html to the stand-summary component -->
-    <stand-summary ng-repeat="info in stats" info="info"></stand-summary>
-    <inventory-summary ng-repeat="ingredient in stand.ingredients" ingredient="ingredient" id="standId"></inventory-summary>
-    <weather-summary ng-repeat="condition in weather" condition="condition"></weather-summary>
+    <div id="stand-summary">
+        <stand-summary ng-repeat="info in stats" info="info"></stand-summary>
+    </div>
+    <div id="weather-summary">
+        <weather-summary ng-repeat="condition in weather" condition="condition"></weather-summary>
+    </div>
+    <div id="inventory-summary"></div>
+        <inventory-summary ng-repeat="ingredient in stand.ingredients" ingredient="ingredient" id="standId"></inventory-summary>
+    </div>
 </section> 

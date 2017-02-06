@@ -215,7 +215,7 @@ module.exports = {
                         title: 'Visitors',
                         value: stand.business.yesterday_visitors,
                     },{
-                        title: 'Balance',
+                        title: 'Customers',
                         value: stand.business.yesterday_cups_sold,
                     }];
                 });

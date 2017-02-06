@@ -5,7 +5,8 @@
 
 //background colors
 $primary-bkgd-color: #FFF ;
-$secondary-bkgd-color: #93E1D8;
+$secondary-bkgd-color: #FFE66D;
+$tertiary-bkgd-color: #FF6B6B;
 $header-bkgd-color: #93E1D8;
 $footer-bkgd-color: #FF6B6B; 
 
@@ -37,4 +38,5 @@ body{
 //partial imports
 @import 'partials/header';
 @import 'partials/main';
+@import 'partials/manage-inventory';
 @import 'partials/footer';
