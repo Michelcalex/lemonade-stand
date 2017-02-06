@@ -4,6 +4,7 @@ module.exports = {
         templateUrl: 'templates/scores.html',
         bindings: {
             score: '<',
+            index: '<',
         }
     },
 }

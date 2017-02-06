@@ -1,5 +1,6 @@
-<section>
+<section id="highscores-section">
     <h2>HighScores</h2>
-
-    <highscore-list ng-repeat="score in scores" score="score"></highscore-list>
+    <div id="highscores-container">
+        <highscore-list ng-repeat="score in scores" ng-show="$index<25" index="$index" score="score"></highscore-list>
+    </div>
 </section> 

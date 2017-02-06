@@ -1,12 +1,10 @@
 module.exports = {
     name: 'ManageInventoryController',
-    func: function ($scope, $state, LemonaidService) {
+    func: function ($scope, $state, $interval, LemonaidService) {
         const currentStand = LemonaidService.getCurrentStand();
         //console.log('this is my currentstand' + currentStand);
 
-        if (currentStand === undefined) {
-            $state.go('create-stand');
-        } else {
+        const loadStandData = function() {
             LemonaidService.getStand(currentStand.stand_id)
                 .then(function (response) {
                     let stand = response.data;
@@ -44,14 +42,21 @@ module.exports = {
                     }];
                 });
 
-                LemonaidService.getWeather()
-                    .then(function(response){
-                        let result = response.data
-                        $scope.weather = [{
-                            temperature: result.temperature,
-                            condition: result.condition,
-                         }];
-                    });
+            LemonaidService.getWeather()
+                .then(function(response){
+                    let result = response.data
+                    $scope.weather = [{
+                        temperature: result.temperature,
+                        condition: result.condition,
+                    }];
+                });
+        };
+
+        if (currentStand === undefined) {
+            $state.go('create-stand');
+        } else {
+            loadStandData();
+            $interval(loadStandData, 5000);
         }
     }
 }

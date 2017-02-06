@@ -68,6 +68,13 @@ app.config(function ($stateProvider) {
         component: 'createStand',
     });
 });
+
+app.filter('titleCase', function() {
+    return function(input) {
+        input = input || '';
+        return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+    };
+});
 },{"./components/createstand":2,"./components/highscorelist":3,"./components/highscores":4,"./components/inventorysummary":5,"./components/manageinventory":6,"./components/standsummary":7,"./components/weathersummary":8,"./controllers/highscores":9,"./controllers/inventorysummary":10,"./controllers/manageinventory":11,"./controllers/newstand":12,"./services/lemonaidservice":13}],2:[function(require,module,exports){
 module.exports = {
     name: 'createStand',
@@ -84,6 +91,7 @@ module.exports = {
         templateUrl: 'templates/scores.html',
         bindings: {
             score: '<',
+            index: '<',
         }
     },
 }
@@ -164,25 +172,23 @@ module.exports = {
 module.exports = {
     name: 'InventorySummaryController',
     func: function ($scope, $state, LemonaidService) {
-            $scope.buy = function(ingredientLabel, quantity) {
-                const currentStand = (LemonaidService.getCurrentStand().stand_id);
-                LemonaidService.buyIngredient(ingredientLabel, quantity, currentStand)
-                    .then(function(response) {
-                        $state.reload();
-                    });
-            }
+        $scope.buy = function(ingredientLabel, quantity) {
+            const currentStand = (LemonaidService.getCurrentStand().stand_id);
+            LemonaidService.buyIngredient(ingredientLabel, quantity, currentStand)
+                .then(function(response) {
+                    $state.reload();
+                });
+        }
     },
 };
 },{}],11:[function(require,module,exports){
 module.exports = {
     name: 'ManageInventoryController',
-    func: function ($scope, $state, LemonaidService) {
+    func: function ($scope, $state, $interval, LemonaidService) {
         const currentStand = LemonaidService.getCurrentStand();
         //console.log('this is my currentstand' + currentStand);
 
-        if (currentStand === undefined) {
-            $state.go('create-stand');
-        } else {
+        const loadStandData = function() {
             LemonaidService.getStand(currentStand.stand_id)
                 .then(function (response) {
                     let stand = response.data;
@@ -220,14 +226,21 @@ module.exports = {
                     }];
                 });
 
-                LemonaidService.getWeather()
-                    .then(function(response){
-                        let result = response.data
-                        $scope.weather = [{
-                            temperature: result.temperature,
-                            condition: result.condition,
-                         }];
-                    });
+            LemonaidService.getWeather()
+                .then(function(response){
+                    let result = response.data
+                    $scope.weather = [{
+                        temperature: result.temperature,
+                        condition: result.condition,
+                    }];
+                });
+        };
+
+        if (currentStand === undefined) {
+            $state.go('create-stand');
+        } else {
+            loadStandData();
+            $interval(loadStandData, 5000);
         }
     }
 }

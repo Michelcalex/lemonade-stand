@@ -1,5 +1,5 @@
 <section>
-    <h3>{{ $ctrl.ingredient.label }}</h3>
+    <h3>{{ $ctrl.ingredient.label | titleCase }}</h3>
     <p>{{ $ctrl.ingredient.value }} in stock</p>
 
     <input type="number" placeholder="{{ $ctrl.ingredient.price }} each" ng-model="quantity" />
