@@ -20,10 +20,10 @@ module.exports = {
                         if(ingredient.label === 'lemons') {
                             ingredient.price = '$2.00';
                         }
-                        if(ingredient.label === 'ice') {
+                        if(ingredient.label === 'sugar') {
                             ingredient.price = '$1.25';
                         }
-                        if(ingredient.label === 'ice') {
+                        if(ingredient.label === 'cups') {
                             ingredient.price = '$0.10';
                         }
                     })

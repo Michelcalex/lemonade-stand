@@ -1255,6 +1255,14 @@ button {
 body {
   color: #1A535C; }
 
+input {
+  padding: 5px;
+  border: none; }
+
+button {
+  padding: 8px 16px;
+  border-radius: 5px; }
+
 header {
   max-width: 75rem;
   margin-right: auto;
@@ -1290,7 +1298,7 @@ main {
   margin-left: auto;
   background-color: #FFF;
   max-width: 100%;
-  height: 650px; }
+  margin: 50px auto 150px; }
   main::before, main::after {
     display: table;
     content: ' '; }
@@ -1302,13 +1310,9 @@ main {
     main #stand-section h3 {
       color: #1A535C; }
     main #stand-section input {
-      padding: 5px;
-      border: none;
       border-bottom: 2px solid #FF6B6B; }
     main #stand-section button {
       background-color: #FFE66D;
-      padding: 8px 16px;
-      border-radius: 5px;
       margin-top: 20px;
       color: #1A535C; }
     main #stand-section button:hover {
@@ -1318,7 +1322,10 @@ main {
 #manage-inventory {
   max-width: 75rem;
   margin-right: auto;
-  margin-left: auto; }
+  margin-left: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center; }
   #manage-inventory::before, #manage-inventory::after {
     display: table;
     content: ' '; }
@@ -1328,7 +1335,7 @@ main {
     max-width: 75rem;
     margin-right: auto;
     margin-left: auto;
-    text-align: center; }
+    margin-top: 0px; }
     #manage-inventory h2::before, #manage-inventory h2::after {
       display: table;
       content: ' '; }
@@ -1336,8 +1343,7 @@ main {
       clear: both; }
   #manage-inventory #stand-summary {
     display: flex;
-    justify-content: center;
-    text-align: center; }
+    justify-content: center; }
     #manage-inventory #stand-summary stand-summary {
       background-color: #FFE66D;
       width: 10%;
@@ -1347,8 +1353,7 @@ main {
         font-weight: bold; }
   #manage-inventory #weather-summary {
     display: flex;
-    justify-content: center;
-    text-align: center; }
+    justify-content: center; }
     #manage-inventory #weather-summary weather-summary {
       background-color: #FF6B6B;
       width: 52%;
@@ -1356,6 +1361,26 @@ main {
       margin-top: 30px; }
       #manage-inventory #weather-summary weather-summary span {
         font-weight: bold; }
+  #manage-inventory #inventory-summary {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; }
+    #manage-inventory #inventory-summary inventory-summary {
+      background-color: #FFE66D;
+      width: 33%;
+      margin: 0px 10px;
+      border-radius: 5px;
+      margin-top: 30px; }
+      #manage-inventory #inventory-summary inventory-summary section {
+        padding: 15px 0px; }
+        #manage-inventory #inventory-summary inventory-summary section h3 {
+          margin-top: 0px; }
+        #manage-inventory #inventory-summary inventory-summary section button {
+          background-color: #93E1D8;
+          color: #1A535C; }
+        #manage-inventory #inventory-summary inventory-summary section button:hover {
+          background-color: #FF6B6B;
+          color: #fff; }
 
 footer {
   background-color: #FF6B6B;

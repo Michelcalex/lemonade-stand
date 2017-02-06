@@ -2,7 +2,9 @@ main {
     @include grid-row();
     background-color: $primary-bkgd-color;
     max-width: 100%;
-    height: 650px;
+    margin: 50px auto 150px;
+    
+    
 
     #stand-section {
         text-align: center;
@@ -13,15 +15,11 @@ main {
         }
 
         input {
-            padding: 5px;
-            border: none;
             border-bottom: 2px solid #FF6B6B;
         }
 
         button {
             background-color: $primary-btn-bkgd-color;
-            padding: 8px 16px;
-            border-radius: $btn-border-radius;
             margin-top: 20px;
             color: $btn-txt-color;
         }

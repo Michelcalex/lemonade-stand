@@ -17,6 +17,7 @@ $tertiary-highlight-txt-color: #fff;
 
 //button properties
 $primary-btn-bkgd-color: #FFE66D;
+$secondary-btn-bkgd-color: #93E1D8;
 $btn-txt-color: #1A535C;
 $hover-btn-bkgd-color: #FF6B6B;
 $hover-btn-txt-color: #fff;
@@ -33,7 +34,15 @@ body{
     color: $primary-txt-color;
 }
 
+input {
+    padding: 5px;
+    border: none;
+}
 
+button {
+    padding: 8px 16px;
+    border-radius: $btn-border-radius;
+}
 
 //partial imports
 @import 'partials/header';
