@@ -1,0 +1,32 @@
+header {
+    @include grid-row();
+    background-color: $secondary-bkgd-color;
+    max-width: 100%;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2%;
+
+        h1 {
+            color: $primary-highlight-txt-color;
+        }
+
+        ul {
+            display: flex;
+            padding: 0;
+
+            li {
+                list-style: none;
+                color: $secondary-highlight-txt-color;
+                padding: 10px;
+
+                a {
+                    text-decoration: none;
+                    color: $secondary-highlight-txt-color;
+                }
+            }
+        }
+    }
+}

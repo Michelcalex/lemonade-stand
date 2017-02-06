@@ -1252,6 +1252,35 @@ button {
       .column-block > :last-child {
         margin-bottom: 0; } }
 
+header {
+  max-width: 75rem;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+  max-width: 100%; }
+  header::before, header::after {
+    display: table;
+    content: ' '; }
+  header::after {
+    clear: both; }
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%; }
+    header nav h1 {
+      color: #FE4A49; }
+    header nav ul {
+      display: flex;
+      padding: 0; }
+      header nav ul li {
+        list-style: none;
+        color: #CDD6D0;
+        padding: 10px; }
+        header nav ul li a {
+          text-decoration: none;
+          color: #CDD6D0; }
+
 #stand-stats div {
   width: 200px;
   height: 200px;

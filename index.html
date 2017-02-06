@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>The Queen City's Lemonaid Stands</title>
+        <title>Queen City's Lemonaid</title>
+        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/5.0.0/normalize.css">
+        <link rel="icon" type="image/x-icon" href="../assets/favicon-lemon-o.ico">
         <link rel="stylesheet" href="style.css">
         <script src="https://use.fontawesome.com/7fb1b7bdac.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
@@ -9,20 +11,26 @@
         <script src="app.js"></script>
     </head>
     <body ng-app="LemonaidStandApp">
-        <h1>The Queen City's Lemonaid Stands</h1>
-        <nav>
-            <ul>
-                <li><a ui-sref="create-stand">Create a Stand</a></li>
-                <li><a ui-sref="manage-inventory">Manage Inventory</a></li>
-                <li><a ui-sref="user-highscores">Highscores</a></li>
-            </ul>
-        </nav>
-
-        <ui-view></ui-view>
-
+        <header>
+            <nav>
+                <div>
+                    <h1>Queen City's Lemonaid</h1>
+                </div>
+                <div>
+                    <ul>
+                        <li><a ui-sref="create-stand">Create a Stand</a></li>
+                        <li><a ui-sref="manage-inventory">Manage Inventory</a></li>
+                        <li><a ui-sref="user-highscores">Highscores</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <ui-view></ui-view>
+        </main>
+        <footer>
+            <p>The best lemonaid. EVER. <i class="fa fa-lemon-o" aria-hidden="true"></i></p>
+            <p>Queen City's Lemonaid<i class="fa fa-copyright" aria-hidden="true"></i>2017</p>
+        </footer>
     </body>
-    <footer>
-        <p>The best lemonaid. EVER. <i class="fa fa-lemon-o" aria-hidden="true"></i></p>
-        <p>The Queen City's Lemonaid<i class="fa fa-copyright" aria-hidden="true"></i>2017</p>
-    </footer>
 </html>

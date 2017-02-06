@@ -4,6 +4,24 @@
 @include foundation-grid;
 
 
+$primary-bkgd-color: #CDD6D0 ;
+$secondary-bkgd-color: #fff;
+
+$primary-highlight-txt-color: #FE4A49;
+$secondary-highlight-txt-color: #CDD6D0;
+$tertiary-highlight-txt-color: #93E1D8;
+
+$primary-btn-bkgd-color: #FFDE00;
+
+$primary-txt-color: #000040;
+
+
+
+
+@import 'partials/header';
+
+
+
 #stand-stats {
 
     div {
