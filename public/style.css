@@ -1252,11 +1252,14 @@ button {
       .column-block > :last-child {
         margin-bottom: 0; } }
 
+body {
+  color: #1A535C; }
+
 header {
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
-  background-color: #fff;
+  background-color: #93E1D8;
   max-width: 100%; }
   header::before, header::after {
     display: table;
@@ -1269,17 +1272,60 @@ header {
     align-items: center;
     padding: 0 2%; }
     header nav h1 {
-      color: #FE4A49; }
+      color: #FF6B6B; }
     header nav ul {
       display: flex;
       padding: 0; }
       header nav ul li {
         list-style: none;
-        color: #CDD6D0;
+        color: #1A535C;
         padding: 10px; }
         header nav ul li a {
           text-decoration: none;
-          color: #CDD6D0; }
+          color: #1A535C; }
+
+main {
+  max-width: 75rem;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #FFF;
+  max-width: 100%;
+  height: 650px; }
+  main::before, main::after {
+    display: table;
+    content: ' '; }
+  main::after {
+    clear: both; }
+  main #stand-section {
+    text-align: center;
+    padding: 11% 0; }
+    main #stand-section h3 {
+      color: #1A535C; }
+    main #stand-section input {
+      padding: 5px;
+      border: none;
+      border-bottom: 2px solid #FF6B6B; }
+    main #stand-section button {
+      background-color: #FFE66D;
+      padding: 8px 16px;
+      border-radius: 5px;
+      margin-top: 20px;
+      color: #1A535C; }
+    main #stand-section button:hover {
+      background-color: #FF6B6B;
+      color: #fff; }
+
+footer {
+  max-width: 75rem;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #FF6B6B;
+  max-width: 100%; }
+  footer::before, footer::after {
+    display: table;
+    content: ' '; }
+  footer::after {
+    clear: both; }
 
 #stand-stats div {
   width: 200px;

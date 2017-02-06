@@ -1,6 +1,6 @@
 header {
     @include grid-row();
-    background-color: $secondary-bkgd-color;
+    background-color: $header-bkgd-color;
     max-width: 100%;
 
     nav {

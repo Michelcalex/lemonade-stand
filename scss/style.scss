@@ -3,30 +3,38 @@
 @include foundation-global-styles;
 @include foundation-grid;
 
+//background colors
+$primary-bkgd-color: #FFF ;
+$secondary-bkgd-color: #93E1D8;
+$header-bkgd-color: #93E1D8;
+$footer-bkgd-color: #FF6B6B; 
 
-$primary-bkgd-color: #CDD6D0 ;
-$secondary-bkgd-color: #fff;
+//highlight text colors
+$primary-highlight-txt-color: #FF6B6B;
+$secondary-highlight-txt-color: #1A535C;
+$tertiary-highlight-txt-color: #fff;
 
-$primary-highlight-txt-color: #FE4A49;
-$secondary-highlight-txt-color: #CDD6D0;
-$tertiary-highlight-txt-color: #93E1D8;
+//button properties
+$primary-btn-bkgd-color: #FFE66D;
+$btn-txt-color: #1A535C;
+$hover-btn-bkgd-color: #FF6B6B;
+$hover-btn-txt-color: #fff;
+$btn-border-radius: 5px;
 
-$primary-btn-bkgd-color: #FFDE00;
-
-$primary-txt-color: #000040;
-
-
-
-
-@import 'partials/header';
-
+//text properties
+$primary-txt-color: #1A535C;
 
 
-#stand-stats {
 
-    div {
-        width: 200px;
-        height: 200px;
-        border: 1px solid red;
-    }
+
+//global variables
+body{
+    color: $primary-txt-color;
 }
+
+
+
+//partial imports
+@import 'partials/header';
+@import 'partials/main';
+@import 'partials/footer';
