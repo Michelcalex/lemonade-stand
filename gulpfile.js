@@ -11,7 +11,7 @@ let sass = require('gulp-sass');
 let browser = require('gulp-browser');
 
 // Step 2: create default task 
-gulp.task('default', ['html', 'css', 'js']);
+gulp.task('default', ['html', 'assets', 'css', 'js']);
 
 // Step 3: create subtasks
 gulp.task('html', function () {
@@ -23,6 +23,11 @@ gulp.task('html', function () {
     // Copy index.html into the public/ directory.
     return gulp.src('index.html')
         .pipe(gulp.dest('public/'));
+});
+
+gulp.task('assets', function() {
+    return gulp.src(['assets/*.ico', 'assets/*.jpg'])
+        .pipe(gulp.dest('public/assets'));
 });
 
 gulp.task('css', function () {
@@ -47,4 +52,5 @@ gulp.task('watch', ['default'], function () {
     gulp.watch('scss/*.scss', ['css']);
     gulp.watch('*.html', ['html']);
     gulp.watch('templates/*.html', ['html']);
+    gulp.watch('assets/**.*', ['assets']);
 });
