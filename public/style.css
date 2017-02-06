@@ -1312,7 +1312,7 @@ main {
     main #stand-section input {
       border-bottom: 2px solid #FF6B6B; }
     main #stand-section button {
-      background-color: #FFE66D;
+      background-color: #93E1D8;
       margin-top: 20px;
       color: #1A535C; }
     main #stand-section button:hover {
@@ -1355,10 +1355,12 @@ main {
     display: flex;
     justify-content: center; }
     #manage-inventory #weather-summary weather-summary {
-      background-color: #FF6B6B;
+      background-color: #1A535C;
       width: 52%;
       border-radius: 5px;
       margin-top: 30px; }
+      #manage-inventory #weather-summary weather-summary p {
+        color: #93E1D8; }
       #manage-inventory #weather-summary weather-summary span {
         font-weight: bold; }
   #manage-inventory #inventory-summary {
@@ -1381,6 +1383,49 @@ main {
         #manage-inventory #inventory-summary inventory-summary section button:hover {
           background-color: #FF6B6B;
           color: #fff; }
+
+#highscores {
+  max-width: 75rem;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 100%;
+  margin: 0 auto; }
+  #highscores::before, #highscores::after {
+    display: table;
+    content: ' '; }
+  #highscores::after {
+    clear: both; }
+  #highscores h2 {
+    max-width: 75rem;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0px;
+    text-align: center; }
+    #highscores h2::before, #highscores h2::after {
+      display: table;
+      content: ' '; }
+    #highscores h2::after {
+      clear: both; }
+  #highscores #highscores-summary {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 1px solid green; }
+    #highscores #highscores-summary highscore-list {
+      background-color: #1A535C;
+      color: #93E1D8;
+      border-radius: 5px;
+      width: 18%;
+      margin: 5px;
+      padding: 10px; }
+      #highscores #highscores-summary highscore-list h3 {
+        text-align: center;
+        margin-top: 0px;
+        color: #FF6B6B; }
+      #highscores #highscores-summary highscore-list p {
+        margin: 5px 0px 5px 10px; }
+        #highscores #highscores-summary highscore-list p span {
+          font-weight: bold; }
 
 footer {
   background-color: #FF6B6B;

@@ -6,18 +6,17 @@
 //background colors
 $primary-bkgd-color: #FFF ;
 $secondary-bkgd-color: #FFE66D;
-$tertiary-bkgd-color: #FF6B6B;
+$tertiary-bkgd-color: #1A535C;
 $header-bkgd-color: #93E1D8;
 $footer-bkgd-color: #FF6B6B; 
 
 //highlight text colors
 $primary-highlight-txt-color: #FF6B6B;
 $secondary-highlight-txt-color: #1A535C;
-$tertiary-highlight-txt-color: #fff;
+$tertiary-highlight-txt-color: #93E1D8;
 
 //button properties
-$primary-btn-bkgd-color: #FFE66D;
-$secondary-btn-bkgd-color: #93E1D8;
+$primary-btn-bkgd-color: #93E1D8;
 $btn-txt-color: #1A535C;
 $hover-btn-bkgd-color: #FF6B6B;
 $hover-btn-txt-color: #fff;
@@ -25,6 +24,7 @@ $btn-border-radius: 5px;
 
 //text properties
 $primary-txt-color: #1A535C;
+$secondary-txt-color: #93E1D8;
 
 
 
@@ -48,4 +48,5 @@ button {
 @import 'partials/header';
 @import 'partials/main';
 @import 'partials/manage-inventory';
+@import 'partials/highscores';
 @import 'partials/footer';
