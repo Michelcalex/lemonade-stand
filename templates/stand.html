@@ -1,6 +1,11 @@
 <section id="stand-section">
     <h3>Do you have what it takes to sell the best lemonaid?</h3>
     <input type="text" ng-model="standName" placeholder="Name your stand here"><br>
-    <button ng-click="add()">Play</button>
+    <div id="play-btns"> 
+        <button ng-click="add()">Play</button>
+        <button ng-mouseover="tooltip=true" ng-mouseleave="tooltip=false">Gameplay</button>
+        <div class="tooltip" ng-show="tooltip" >Queen City's Lemonaid is a resource management game where you spend your hard-earned digital money on ingredients for your lemonaid stand. You will need four ingredients to run a stand and money: <span>Lemons</span>: one lemon can make four cups of lemonaid. <span>Sugar</span>: one bag of sugar can make two cups of lemonaid. <span>Ice</span>: one chunk of ice can make one cup of lemonaid. All unused ice melts at the end of each day. <span>Cups</span>: one cup is required for each cup of lemonaid.You can spend your money to replenish any of these ingredients, and cannot go into debt. If you run out of money, you loose the game.
+        </div>
+    </div>
     <div id="bottom"></div>
 </section>

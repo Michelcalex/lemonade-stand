@@ -1327,13 +1327,26 @@ main {
       color: #1A535C; }
     main #stand-section input {
       border-bottom: 2px solid #FF6B6B; }
-    main #stand-section button {
-      background-color: #93E1D8;
-      margin-top: 20px;
-      color: #1A535C; }
-    main #stand-section button:hover {
-      background-color: #FF6B6B;
-      color: #fff; }
+    main #stand-section #play-btns {
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
+      main #stand-section #play-btns button {
+        background-color: #93E1D8;
+        margin-top: 20px;
+        color: #1A535C; }
+      main #stand-section #play-btns button:hover {
+        background-color: #FF6B6B;
+        color: #fff; }
+      main #stand-section #play-btns .tooltip {
+        width: 55%;
+        height: 100px;
+        color: #FF6B6B;
+        font-size: 0.7rem;
+        margin-top: 20px;
+        font-style: italic; }
+        main #stand-section #play-btns .tooltip span {
+          font-weight: 700; }
     main #stand-section #bottom {
       background-image: url("../../assets/yellow-stripes.jpg");
       width: 100%;

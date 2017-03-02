@@ -19,15 +19,34 @@ main {
             border-bottom: 2px solid #FF6B6B;
         }
 
-        button {
-            background-color: $primary-btn-bkgd-color;
-            margin-top: 20px;
-            color: $btn-txt-color;
-        }
+        #play-btns {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-        button:hover {
-            background-color: $hover-btn-bkgd-color;
-            color: $hover-btn-txt-color;
+            button {
+                background-color: $primary-btn-bkgd-color;
+                margin-top: 20px;
+                color: $btn-txt-color;
+            }
+
+            button:hover {
+                background-color: $hover-btn-bkgd-color;
+                color: $hover-btn-txt-color;
+            }
+
+            .tooltip {
+                width: 55%;
+                height: 100px;
+                color: #FF6B6B;
+                font-size: 0.7rem;
+                margin-top: 20px;
+                font-style: italic;
+
+                span {
+                    font-weight: 700;
+                }
+            }
         }
 
         #bottom {
